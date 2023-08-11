@@ -80,7 +80,7 @@ public class Sorter implements Sort{
     public void quickSorter(long[]longs, int l, int h){
         int low = 0;
         int high = longs.length -1;
-        int pivotIndex = partition(longs);
+        int pivotIndex = partition(longs, low, high);
         quickSorter(longs, low, pivotIndex);
         quickSorter(longs, pivotIndex +1, high);
     }
