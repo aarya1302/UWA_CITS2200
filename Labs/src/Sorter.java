@@ -74,6 +74,30 @@ public class Sorter implements Sort{
     @Override
     public void quickSort(long[] longs) {
 
+
+
+    }
+    public void quickSorter(long[]longs, int l, int h){
+        int low = 0;
+        int high = longs.length -1;
+        int pivotIndex = partition(longs);
+        quickSorter(longs, low, pivotIndex);
+        quickSorter(longs, pivotIndex +1, high);
+    }
+    public int partition(long[] longs, int low, int high){
+        long pivotValue = longs[high];
+        int i = low -1 ;
+        for (int j = low; j < high; j++){
+            if(longs[j] < pivotValue){
+                i++;
+                long temp = longs[j];
+                longs[j] = longs[i];
+                longs[i] = temp;
+            }
+        }
+        longs[i+1] = pivotValue;
+        return i + 1;
+
     }
 }
 
