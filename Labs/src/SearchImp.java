@@ -40,15 +40,20 @@ public class SearchImp implements Search{
         Arrays.fill(distances, -1);
         boolean[] visited = new boolean[graph.getNumberOfVertices()];
         distances[i] = 0;
-        int[] edges = graph.getEdgeMatrix()[i];
-        for (int j = 0; j < edges.length; j++) {
-            if(edges[j] == 1 & !visited[j]){
-                visited[j] = true;
-                int dist= distances[i] + 1;
-                if(dist < distances[j]) distances[j] = dist;
-                DFS(graph, j);
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(i);
+        while(!queue.isEmpty()){
+            int[] edges = graph.getEdgeMatrix()[i];
+            for (int j = 0; j < edges.length; j++) {
+                if(edges[j] == 1 & !visited[j]){
+                    queue.add(j);
+                    visited[j] = true;
+                    int dist= distances[i] + 1;
+                    if(dist < distances[j]) distances[j] = dist;
+                }
             }
         }
+
         return distances;
     }
     public void DFS(Graph graph, int vertex){
@@ -60,5 +65,10 @@ public class SearchImp implements Search{
                 DFS(graph, i);
             }
         }
+    }
+
+    @Override
+    public int[][] getTimes(Graph graph, int i) {
+        return new int[0][];
     }
 }
